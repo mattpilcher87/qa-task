@@ -31,7 +31,7 @@ console.log('Coordinates', coordinatesOpts.uri)
 
 // CityID
 describe('Current Weather Tests - cityID', function() {
-  describe('Status Code', function(done) {
+  describe('Status Code', function() {
     it('Should return 200', function(done) {
       request(cityIdOpts).then(function(res) {
         assert.equal(200, res.statusCode);
@@ -59,7 +59,7 @@ describe('Current Weather Tests - cityID', function() {
 
 // Coordinates
 describe('Current Weather Tests - Coordinates', function() {
-  describe('Status Code', function(done) {
+  describe('Status Code', function() {
     it('Should return 200', function(done) {
       request(coordinatesOpts).then(function(res) {
         console.log(res.body.weather)
@@ -69,7 +69,7 @@ describe('Current Weather Tests - Coordinates', function() {
     });
   })
 
-  describe('Coordinates', function(done) {
+  describe('Coordinates', function() {
     it('Should return name as Portsmouth', function(done) {
       request(coordinatesOpts).then(function(res) {
         assert.equal('Portsmouth', res.body.name);
