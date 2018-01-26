@@ -32,26 +32,18 @@ console.log('Coordinates', coordinatesOpts.uri)
 // CityID
 describe('Current Weather Tests - cityID', function() {
   describe('Status Code', function() {
-    it('Should return 200', function(done) {
-      request(cityIdOpts).then(function(res) {
+    it('Should return 200', function() {
+      return request(cityIdOpts).then(function(res) {
         assert.equal(200, res.statusCode);
-        done();
       })
     });
   })
 
   describe('City Name', function() {
-    it('Should return name as Portsmouth', function(done) {
-      request(cityIdOpts).then(function(res) {
+    it('Should return name as Portsmouth as a string', function() {
+      return request(cityIdOpts).then(function(res) {
         assert.equal('Portsmouth', res.body.city.name);
-        done();
-      })
-    });
-
-    it('As a string', function(done) {
-      request(cityIdOpts).then(function(res) {
-        assert.typeOf(res.body.city.name, 'string', 'Its a string');
-        done();
+        assert.typeOf(res.body.city.name, 'string');
       })
     });
   })
@@ -60,35 +52,34 @@ describe('Current Weather Tests - cityID', function() {
 // Coordinates
 describe('Current Weather Tests - Coordinates', function() {
   describe('Status Code', function() {
-    it('Should return 200', function(done) {
-      request(coordinatesOpts).then(function(res) {
-        console.log(res.body.weather)
+    it('Should return 200', function() {
+      return request(coordinatesOpts).then(function(res) {
+        console.log(res.body)
         assert.equal(200, res.statusCode);
-        done();
       })
     });
   })
 
   describe('Coordinates', function() {
-    it('Should return name as Portsmouth', function(done) {
-      request(coordinatesOpts).then(function(res) {
+    it('Should return name as Portsmouth As a String', function() {
+      return request(coordinatesOpts).then(function(res) {
         assert.equal('Portsmouth', res.body.name);
-        done();
+        assert.typeOf(res.body.name, 'string');
       })
     });
 
-    it('Should return coordinates as an object', function(done) {
-      request(coordinatesOpts).then(function(res) {
+    it('Should return correct coordinates to one decimal as an object', function() {
+      return request(coordinatesOpts).then(function(res) {
+        assert.equal(res.body.coord.lon, -1.11)
+        assert.equal(res.body.coord.lat, 50.8)
         assert.typeOf(res.body.coord, 'object');
-        done();
       })
     });
 
-    it('Should return the weather as an object', function(done) {
-      request(coordinatesOpts).then(function(res) {
+    it('Should return the weather as an object', function() {
+      return request(coordinatesOpts).then(function(res) {
         assert.typeOf(res.body.weather, 'array');
         console.log('Weather today is ' + res.body.weather[0].main + ' as ' + res.body.weather[0].description)
-        done();
       })
     });
   })
